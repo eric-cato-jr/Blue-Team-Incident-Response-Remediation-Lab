@@ -6,12 +6,12 @@ This lab simulates a real-world attack lifecycle involving vulnerability discove
 
 The lab demonstrates hands-on experience with:
 
-- Network attack simulation
-- Vulnerability identification
-- Manual exploitation using Metasploit
-- Malware detection with ClamAV
-- Patch deployment
-- Post-remediation validation
+- Network attack simulation  
+- Vulnerability identification  
+- Manual exploitation using Metasploit  
+- Malware detection with ClamAV  
+- Patch deployment  
+- Post-remediation validation  
 
 This project mirrors real-world blue team and SOC workflows.
 
@@ -21,17 +21,19 @@ This project mirrors real-world blue team and SOC workflows.
 
 ![Lab Topology](Lab-Infra.png)
 
-## Infrastructure Breakdown
+The topology above illustrates the segmented internal network protected by a pfSense firewall. The attacker system resides outside the internal network and attempts exploitation through exposed web services.
 
-| Component        | Role |
-|------------------|------|
-| pfSense          | Firewall/Router |
-| Internal IP      | 172.30.0.1 |
-| External IP      | 202.20.1.1 |
-| vWorkstation     | 172.30.0.2 (Target System) |
-| AttackLinux01    | 10.0.1.3 (Attacker Machine) |
+---
 
-The attacker resides outside the internal network and attempts exploitation through exposed services.
+# 🧰 Tools Used
+
+- **pfSense** (Firewall/Router)
+- **Metasploit Framework**
+- **Infection Monkey**
+- **ClamAV**
+- **Linux (Ubuntu)**
+- **Apache mod_cgi**
+- **Bash**
 
 ---
 
@@ -86,9 +88,9 @@ This confirmed endpoint detection was functioning correctly.
 A recursive scan was executed across the filesystem.
 
 Results:
-- 217 files scanned
-- 2 infected files detected
-- Detection engine functioning properly
+- 217 files scanned  
+- 2 infected files detected  
+- Detection engine functioning properly  
 
 ---
 
@@ -98,12 +100,12 @@ Results:
 
 The attack report provided:
 
-- Exploitation pathways
-- Compromised nodes
-- Vulnerability risk ratings
-- Attack surface analysis
+- Exploitation pathways  
+- Compromised nodes  
+- Vulnerability risk ratings  
+- Attack surface analysis  
 
-This simulates SOC-level attack reporting.
+This simulates SOC-level attack reporting and review.
 
 ---
 
@@ -113,10 +115,10 @@ This simulates SOC-level attack reporting.
 
 Recommended mitigation steps included:
 
-- Patch vulnerable services
-- Update outdated Bash packages
-- Harden exposed services
-- Restrict unnecessary network exposure
+- Patch vulnerable services  
+- Update outdated Bash packages  
+- Harden exposed services  
+- Restrict unnecessary network exposure  
 
 ---
 
@@ -136,10 +138,10 @@ Metasploit was used to search for Shellshock-related exploit modules targeting A
 
 The module was configured with:
 
-- `RHOST` → Target IP
-- `LHOST` → Attacker IP
-- `TARGETURI` → `/cgi-bin/test-cgi.sh`
-- Reverse TCP payload
+- `RHOST` → Target IP  
+- `LHOST` → Attacker IP  
+- `TARGETURI` → `/cgi-bin/test-cgi.sh`  
+- Reverse TCP payload  
 
 Proper configuration ensured exploit reliability.
 
@@ -150,9 +152,9 @@ Proper configuration ensured exploit reliability.
 ![Metasploit Show Options](Metasploit-Show.png)
 
 Verified:
-- Target port 80
-- Correct payload selection
-- Reverse TCP handler enabled
+- Target port 80  
+- Correct payload selection  
+- Reverse TCP handler enabled  
 
 Configuration validated prior to execution.
 
@@ -164,9 +166,9 @@ Configuration validated prior to execution.
 
 Results:
 
-- Reverse TCP handler started
-- Meterpreter session established
-- Remote shell access obtained
+- Reverse TCP handler started  
+- Meterpreter session established  
+- Remote shell access obtained  
 
 This confirmed the system was vulnerable to CVE-2014-6271.
 
@@ -208,46 +210,24 @@ This mitigated the Shellshock vulnerability by patching the underlying Bash envi
 
 After patching:
 
-- Re-ran exploit check
-- Target reported: **"The target is not exploitable"**
-- No session created
+- Re-ran exploit check  
+- Target reported: **"The target is not exploitable"**  
+- No session created  
 
 This confirmed successful remediation.
 
 ---
 
-# 🧠 Incident Response Lifecycle Demonstrated
+# 🧾 Conclusion
 
-This lab demonstrates the full defensive workflow:
-
-1. Detect vulnerabilities  
-2. Validate exploitability  
-3. Perform exploitation analysis  
-4. Patch the vulnerability  
-5. Retest to confirm mitigation  
+This lab demonstrates the complete defensive lifecycle of identifying, validating, and remediating a critical vulnerability within a segmented network environment. By combining automated attack simulation with manual exploitation and patch validation, the project reflects real-world security operations workflows. The ability to confirm exploitability, apply corrective measures, and retest systems ensures that remediation efforts are both effective and measurable.
 
 ---
 
-# 🧰 Technologies Used
+# 🎯 Key Takeaways
 
-- pfSense
-- Metasploit Framework
-- Infection Monkey
-- ClamAV
-- Linux (Ubuntu)
-- Apache mod_cgi
-- Bash
-
----
-
-# 🎯 Key Takeaway
-
-This project reflects real-world blue team operations involving:
-
-- Vulnerability management
-- Exploit validation
-- Patch deployment
-- Security verification
-- Incident documentation
-
-It demonstrates the ability to not only identify vulnerabilities, but also remediate and validate security improvements — a critical skill for SOC and security engineering roles.
+- Vulnerability detection alone is not enough — validation through testing is critical  
+- Exploitation analysis helps security teams understand real risk impact  
+- Patch management must always be followed by verification testing  
+- Defensive security requires visibility, documentation, and structured response  
+- Blue team operations depend on both automated tools and manual investigation  
